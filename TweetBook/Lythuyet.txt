@@ -1,0 +1,10 @@
+﻿
+
+1/ Có 3 container chính của Swashbuckle:		
+	+ Swagger: là một đối tượng và là một middleware dùng để thể hiện SwaggerDocument = JSON
+	+ SwaggerGen: dùng để tạo ra SwaggerDocument từ routes,controllers,models của chúng ta. Nó thường kết hợp với Swagger endpoint Middleware để tự động hiển thị Swagger JSON
+	+ SwaggerUI: Dùng để mô tả các API, được nhúng bởi Swagerr UI tool
+
+2/ Các bước config Swagerr
+	+ Bước 1: AddSwaggerGen()
+	+ Bước 2: UseSwagger(RouteTemplate), UseSwaggerUI(Endpoint)

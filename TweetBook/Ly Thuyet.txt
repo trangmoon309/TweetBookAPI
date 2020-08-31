@@ -1,0 +1,68 @@
+﻿
+
+1/ Combine service collection:
+- Giúp chúng ta đăng ký service bind với configuration options
+services.Configure<PositionOptions>(
+        Configuration.GetSection(PositionOptions.Position));
+
+    services.Configure<ColorOptions>(
+        Configuration.GetSection(ColorOptions.Color));
+
+
+2/ Bind configuration Data using the options:
+ "Position": {
+    "Title": "Editor",
+    "Name": "Joe Smith"
+  }
+
+  public class PositionOptions
+{
+    public const string Position = "Position";
+
+    public string Title { get; set; }
+    public string Name { get; set; }
+}
+
+
+var positionOptions = new PositionOptions();
+        Configuration.GetSection(PositionOptions.Position).Bind(positionOptions);
+
+
+3/ JWT(Json Web Token):
+- Phần header sẽ chứa kiểu dữ liệu , và thuật toán sử dụng để mã hóa ra chuỗi JWT
+- Phần payload sẽ chứa các thông tin mình muốn đặt trong chuỗi 
+- Phần chữ ký này sẽ được tạo ra bằng cách mã hóa phần header , payload kèm theo một chuỗi secret (khóa bí mật)
+- Khi bạn gửi request đến server thì luôn phải đi kèm với token để xác thực và phân quyền, xem bạn có quyền để truy cập vào api đó hay không.
+- Những API có bảo mật thì mới cần token để xác thực
+- Token Authentication:
+    + Khi đăng nhập thành công, hệ thống trả về token, token được lưu ở client(local storage, session storage, cookie). Mỗi request(lời gọi API) sau đó sẽ đc 
+    gắn vào phần header của HTTP 
+    + Server kiểm tra token có hợp lệ không và trả lại kết quả cho người dùng.
+
+- Điểm mạnh của Token Authentication:
+    + Dễ maintain, mở rộng (vì server k lưu trữ), cách cũ thì ta phải lưu session ở server..
+    + Bảo mật
+    + Ủy quyền: đăng nhập = face/gg
+    + Đa nền tảng: web, mobile, IOT
+
+- JWT là một chuỗi gồm 3 phần, mỗi phần cách nhau bởi dấu chấm (header.payload.signature)
+
+- Có 3 phương pháp xác thực phổ biến:
+    + Basic Auth (username và password đc lưu ở DB, server sẽ check thông tin ở DB nếu phù hợp thì trả lại trang)
+    + Session Auth (hay còn gọi là Cookie Auth) : khi người dùng đăng nhập thành công thì sẽ tạo ra session người dùng ở server, session sẽ chứa thông
+    tin của người dùng đang đăng nhập và sau đó trả lại sessionID để truy cập session cho những request sau. Dữ liệu của session đc lưu ở DB, còn sessionID
+    được lưu ở cookie hoặc URL trang web.
+    + Token Auth: một chuỗi ký tự (thường được mã hóa) mang thông tin xác định người dùng được server tạo ra và lưu ở client. Server sau đó có thể không 
+    lưu lại token này.
+
+
+- Bearer Scheme là cách thức dùng để truyền token vào trong HTTP Request
+    + Ví dụ như: Authorization: Bearer cn389ncoiwuencr
+    + Template: Authorization: <type> <credentials:token>
+
+
+4/ User specific content with JWT claims:
+- Cách chúng ta có thể sử dụng một userID để tạo một Post dành cho 1 user nhất định, được xem bởi các user nhất định
+- Ví dụ như userA create bài post A thì chỉ userA mới được delete, update nos
+- Bước 1: Tạo extension GeneralExtention dùng để lấy userID từ token, thêm 2 thuộc tính mới vào Post.Domain
+- Bước 2: thêm các đoạn code vào trong PostController(create,update,..)
