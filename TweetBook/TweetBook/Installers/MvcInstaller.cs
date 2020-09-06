@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using TweetBook.Authorization;
+using TweetBook.Filters;
 using TweetBook.Options;
 using TweetBook.Services;
 
@@ -25,7 +29,10 @@ namespace TweetBook.Installers
             services.AddSingleton(jwtSettings);
 
             //thiết lập các phiên bản tương thích
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc()
+                //FluentValidation
+                .AddFluentValidation(mvcConfig => mvcConfig.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             //TokenValidationParameters property phải được cài đặt cho JWTBearerOptions thì nó cho phép người gọi chỉ định các cài đặt nâng
             // cao hơn về cách mà mã JWT token được xác thực.
@@ -44,6 +51,8 @@ namespace TweetBook.Installers
 
             services.AddSingleton(tokenValidationParameters);
 
+
+            //AUTHENTICATION
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,33 +67,19 @@ namespace TweetBook.Installers
                     x.TokenValidationParameters = tokenValidationParameters;
                 });
 
+
+            //AUTHORIZATION
+            services.AddAuthorization(options => {
+                options.AddPolicy("TagViewer", builder => builder.RequireClaim("tags.view", "true"));
+                options.AddPolicy("CustomPolicy", policy => policy.AddRequirements(new WorksForCompanyRequirement(".dut")));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, WorksForCompanyHandler>();
+
             
-            services.AddMvc(opt => opt.EnableEndpointRouting = false);
-
-            //Add Swagger tool
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "TweetBook API", Version = "v1" });
-
-                //Swagger also needs to know about jwt config authentication
-                //Thêm Authorization vào swaggerUI
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using bearer scheme",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {new OpenApiSecurityScheme{Reference = new OpenApiReference
-                    {
-                        Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
-                    }}, new List<string>()}
-                });
-
+            services.AddMvc(opt => {
+                opt.EnableEndpointRouting = false;
+                opt.Filters.Add<ValidationFilter>();
             });
 
             services.AddScoped<IIdentityService, IdentityService>();

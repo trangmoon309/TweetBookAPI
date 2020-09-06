@@ -66,3 +66,58 @@ var positionOptions = new PositionOptions();
 - Ví dụ như userA create bài post A thì chỉ userA mới được delete, update nos
 - Bước 1: Tạo extension GeneralExtention dùng để lấy userID từ token, thêm 2 thuộc tính mới vào Post.Domain
 - Bước 2: thêm các đoạn code vào trong PostController(create,update,..)
+
+
+5/ Testing: Có 2 loại kiểm thử: kiểm thử đơn vị(unit test) và kiểm thử tích hợp(integration test)
+- Học về intergration Test
+- Bước 1: Add new project (unit test)
+- Bước 2: Cài các package cần thiết: asp.net core.testing, asp.net core.app
+
+
+6/ Domain(DTO) to Contract(response/request) mapping with Automapper:
+- package: AutoMapper, autommaper dj
+- CreateMap<Source,Destination>();
+- CreateMap<Source,Destination>().ForMemer(x => x.member, opt => opt.MapFrom(src => src.Tags.Select(x => x.srcMemer)));
+
+7/ Validating requests with FluentValidation
+- Vi du khi ta tạo một post/tag, trước khi tạo 1 object mới, t phải kiểm tra phần request FromBody có null hay không
+    như: 
+        if(string.IsNullOrEmpty(request.TagName)) return BadRequest(new {error = "empty name"});
+    và công việc kiểm tra này được lặp lại ở nhiều method khác nhau, vì vậy để tiết kiệm thời gian
+    ta đẽ dùng validating request.
+
+- FluentValidation: package(FluentValidation), tạo folder Validator
+    Sau đó dùng ModelState để kiểm tra trạng thái của request bằng cơ chế fluentValidation
+
+- Tạo folder Validator để tạo class validate
+- Tạo folder Filters, class Response.ErrorModel và ErrorResponse
+
+
+- Trước khi vào controller, mvc sẽ kiểm tra modelstate trước là có valid hay không, khi đó sẽ  chạy hàm CreateTagRequestValidator
+(class kế thừa AbstractValidator<class muốn validate>) để kiểm tra xem model có valid không. Sau khi kiểm tra xong sẽ
+chạy hàm ValidationFilter : IAsyncActionFilter để tổng hợp các lỗi(nếu có) và ta sẽ thêm các lỗi đó vào ErrorResponse
+=> Từ đó, lỗi !modelstate.isvalid sẽ được tự động xử lì mà k cần chúng ta phải thêm các dòng lệnh kiểm tra
+vào đầu mỗi controller nữa.
+
+
+8/
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>  - allow us to generate this XMLfile will loaded in our DI to describe our API
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  package: swashbuckle.aspnetcore.filters
+  - Tạo folder example và các class example cho request và response
+  - cài đặt DI 
+              services.AddSwaggerExamplesFromAssemblyOf<Startup>();
+              và   options.ExampleFilters();
+
+
+9/ API SDK:
+- Tạo project (Class Library .Net Core)
+- Tạo các IIdentityAPI và ITweetbookAPI, 
+- sau đó tải package Refit, (an interface automatically creates its own implementation)
+
+10/ Setting up ApiKey-based Authentication:
+

@@ -1,0 +1,8 @@
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\b\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\b\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\b\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\b\TweetBook.IntegrationTests\bin\Debug\TweetBook.IntegrationTests.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\i\TweetBook.IntegrationTests\Debug\TweetBook.IntegrationTests.csprojAssemblyReference.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\i\TweetBook.IntegrationTests\Debug\TweetBook.IntegrationTests.csproj.CoreCompileInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\i\TweetBook.IntegrationTests\Debug\TweetBook.IntegrationTests.csproj.CopyComplete
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\.vs\TweetBook\v16\lut\0\i\TweetBook.IntegrationTests\Debug\TweetBook.IntegrationTests.dll

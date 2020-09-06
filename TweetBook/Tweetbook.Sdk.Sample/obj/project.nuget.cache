@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "nxQVSuBNM1N3S17klx+VV2lu4v/QWnKC+RiMpLtZ4nLmxqHSZwbivb5PHZau0OOHTJPkjsB97Bg0HUN/v8L0Tw==",
+  "success": true,
+  "projectFilePath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk.Sample\\Tweetbook.Sdk.Sample.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\huynh\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\huynh\\.nuget\\packages\\refit\\5.2.1\\refit.5.2.1.nupkg.sha512",
+    "C:\\Users\\huynh\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512"
+  ],
+  "logs": []
+}

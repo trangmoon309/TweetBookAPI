@@ -17,7 +17,10 @@ namespace TweetBook.Installers
         {
             services.AddDbContext<DataContext>(options =>options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    //quản lý truy cập với roles
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<DataContext>();
+
 
             services.AddScoped<IPostService, PostService>();
             //services.AddSingleton<IPostService, CosmosPostService>();

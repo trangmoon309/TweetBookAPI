@@ -16,6 +16,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using TweetBook.Options;
 using TweetBook.Installers;
 using TweetBook.Services;
+using AutoMapper;
 
 namespace TweetBook
 {
@@ -31,12 +32,11 @@ namespace TweetBook
         public void ConfigureServices(IServiceCollection services)
         {
             services.InstallServiceAssembly(Configuration);
-
+            //typeof(Startup) tell the mapper to find the assembly that this type is in and automatically resolve
+            //any mapping profile and register them in the eye without us have to any work
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddRazorPages();
-
-          
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

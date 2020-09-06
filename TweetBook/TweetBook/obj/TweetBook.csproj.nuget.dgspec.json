@@ -4,14 +4,14 @@
     "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj": {}
   },
   "projects": {
-    "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj": {
+    "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj",
-        "projectName": "TweetBook",
-        "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj",
+        "projectUniqueName": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj",
+        "projectName": "Tweetbook.Contracts",
+        "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj",
         "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
-        "outputPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\obj\\",
+        "outputPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,7 +37,136 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\Tweetbook.Sdk.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\Tweetbook.Sdk.csproj",
+        "projectName": "Tweetbook.Sdk",
+        "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\Tweetbook.Sdk.csproj",
+        "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
+        "outputPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj": {
+                "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
           "dependencies": {
+            "Refit": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj",
+        "projectName": "TweetBook",
+        "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\TweetBook.csproj",
+        "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
+        "outputPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\TweetBook\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj": {
+                "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Contracts\\Tweetbook.Contracts.csproj"
+              },
+              "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\Tweetbook.Sdk.csproj": {
+                "projectPath": "D:\\Self-learning\\(3).C#\\6.ASP.NET Core\\API\\TweetBookAPI\\TweetBook\\Tweetbook.Sdk\\Tweetbook.Sdk.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Cosmonaut": {
               "target": "Package",
               "version": "[2.11.3, )"
@@ -45,6 +174,14 @@
             "Cosmonaut.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[2.3.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[9.2.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[9.2.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -85,6 +222,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.5.1, )"
+            },
+            "Swashbuckle.AspNetCore.Filters": {
+              "target": "Package",
+              "version": "[5.1.2, )"
             }
           },
           "imports": [

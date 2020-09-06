@@ -1,0 +1,13 @@
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.deps.json
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.csprojAssemblyReference.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.AssemblyInfoInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.AssemblyInfo.cs
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\RefitStubs.g.cs
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.csproj.CoreCompileInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.csproj.CopyComplete

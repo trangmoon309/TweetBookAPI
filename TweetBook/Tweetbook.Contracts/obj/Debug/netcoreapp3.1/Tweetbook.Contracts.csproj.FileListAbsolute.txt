@@ -1,0 +1,9 @@
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.AssemblyInfoInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.AssemblyInfo.cs
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.csproj.CoreCompileInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.csprojAssemblyReference.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.deps.json
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Contracts\obj\Debug\netcoreapp3.1\Tweetbook.Contracts.pdb

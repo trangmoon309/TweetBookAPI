@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TweetBook</name>
+    </assembly>
+    <members>
+        <member name="M:TweetBook.Controllers.TagsController.GetAll">
+            <summary>
+            Returns all the tags in systems
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TweetBook.Controllers.TagsController.Create(TweetBook.Contracts.V1.Request.CreateTagRequest)">
+            <summary>
+            Create a tag in the system
+            </summary>
+            <remarks>
+                Sample **request**:     
+                    POST api/v1/tags
+                    {
+                        "name": "some name"
+                    }
+            </remarks>
+            <response code="200">Creates a tag in the system</response>
+            <response code="400">Unable to create a tag in the system due to validation error</response>
+        </member>
+        <member name="T:TweetBook.SwaggerExamples.Request.CreateTagRequestExample">
+            <summary>
+             <remarks></remarks>
+            </summary>
+        </member>
+    </members>
+</doc>

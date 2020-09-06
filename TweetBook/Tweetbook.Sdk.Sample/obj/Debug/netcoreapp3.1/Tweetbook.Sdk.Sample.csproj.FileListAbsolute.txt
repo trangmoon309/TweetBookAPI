@@ -1,0 +1,15 @@
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.deps.json
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.csprojAssemblyReference.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.AssemblyInfoInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.AssemblyInfo.cs
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.csproj.CoreCompileInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Sdk.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\bin\Debug\netcoreapp3.1\Tweetbook.Contracts.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\RefitStubs.g.cs
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\Tweetbook.Sdk.Sample\obj\Debug\netcoreapp3.1\Tweetbook.Sdk.Sample.csproj.CopyComplete

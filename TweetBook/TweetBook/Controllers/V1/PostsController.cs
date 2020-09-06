@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,35 +22,67 @@ namespace TweetBook.Controllers.V1
     //JwtBearerDefault: Default values used by bearer authentication.
     // Mục đích là không định nghĩa việc xác thực và mặc định chúng. 
     // Bằng cách: nói cho Authentication biết AuthenticateScheme và DefaultChallengeScheme  cần được sử dụng JwtBearer
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Poster,Admin")]
     public class PostsController : Controller
     {
         private IPostService service { get; set; }
-        public PostsController(IPostService service)
+        private readonly IMapper mapper;
+        public PostsController(IPostService service, IMapper mapper)
         {
             this.service = service;
+            this.mapper = mapper;
         }
 
         [HttpGet(ApiRoutes.Posts.GetAll)]
         public async Task<ActionResult<IEnumerable<Post>>> GetAll()
         {
-            return  Ok(await service.GetPosts());
+            var posts = await service.GetPosts();
+            //List<PostResponse> response = posts.Select(e => new PostResponse
+            //{
+            //    Id = e.Id,
+            //    UserId = e.UserId,
+            //    Name = e.Name,
+            //    Tags = e.Tags.Select(x => new TagResponse { Name = x.Name})
+            //}).ToList();
+
+            var response = mapper.Map<List<PostResponse>>(posts);
+            return  Ok(response);
         }
 
         [HttpGet(ApiRoutes.Posts.GetOne)]
         public async Task<ActionResult<Post>> GetOne([FromRoute]Guid id)
         {
-            Post post = await service.GetPostById(id);    
+            Post post = await service.GetPostById(id);
 
             if (post == null) return NotFound();
-            else return Ok(post);
+            //else return Ok(new PostResponse 
+            //{ 
+            //    Id = post.Id, 
+            //    Name = post.Name, 
+            //    UserId = post.UserId, 
+            //    Tags = post.Tags.Select(e => new TagResponse { Name = e.Name }).ToList() 
+            //}); 
+
+            else return Ok(mapper.Map<PostResponse>(post));
         }
 
         //FromBody nói API rằng có 1 post request đc gửi đến và API sẽ map body trong request với các object nào đó.
         [HttpPost(ApiRoutes.Posts.Create)]
         public async Task<IActionResult> Create([FromBody] CreatePostRequest postRequest)
         {
-            var post = new Post { Id = Guid.NewGuid(), Name = postRequest.Name, UserId = HttpContext.GetUserId() };
+            List<Tag> tags = new List<Tag>();
+            foreach(var item in postRequest.Tags)
+            {
+                tags.Add(new Tag
+                {
+                    TagId = Guid.NewGuid().ToString(),
+                    Name = item.Name,
+                    CreatorID = HttpContext.GetUserId(),
+                    CreatedBy = item.CreatedBy,
+                    CreatedOn = DateTime.UtcNow
+                });
+            }
+            var post = new Post { Id = Guid.NewGuid(), Name = postRequest.Name, UserId = HttpContext.GetUserId(), Tags = tags};
 
             //if (Guid.Empty != postRequest.Id) post.Id = Guid.NewGuid();
             await service.AddPost(post);
@@ -58,7 +91,7 @@ namespace TweetBook.Controllers.V1
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUrl = baseUrl + "/" + ApiRoutes.Posts.GetOne.Replace("{id}", post.Id.ToString());
 
-            var response = new PostResponse { Id = post.Id };
+            var response = mapper.Map<PostResponse>(post);
 
             return Created(locationUrl, response);
             //return CreatedAtAction(nameof(GetOne), new { id = post.Id }, post);
@@ -75,7 +108,8 @@ namespace TweetBook.Controllers.V1
                 return BadRequest(error: new { error = "You don't own this post." });
             }
 
-            Post updatedPost = new Post { Id = id, Name = newPost.Name, UserId = userId };
+            Post updatedPost = new Post { Id = id, Name = newPost.Name, UserId = userId, 
+                Tags = newPost.Tags.Select(x => new Tag { Name = x.Name, CreatedBy = x.CreatedBy }).ToList() };
 
             var result =  await service.UpdatePost(updatedPost);
             if (result) return Ok(newPost);
@@ -83,6 +117,8 @@ namespace TweetBook.Controllers.V1
         }
 
         [HttpDelete(ApiRoutes.Posts.Delete)]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Poster")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
 

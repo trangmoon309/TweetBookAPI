@@ -37,7 +37,7 @@ namespace TweetBook.Controllers.V1
             {
                 return BadRequest(new AuthFailedResponse() { Errors = authResponse.Errors });
             }
-            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken });
+            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken.JwtId });
         }
 
         [HttpPost(ApiRoutes.Identity.Login)]
@@ -46,7 +46,7 @@ namespace TweetBook.Controllers.V1
             var authResponse = await identityService.LoginAsync(request.Email, request.Password);
             if (!authResponse.Success) return BadRequest(new AuthFailedResponse() { Errors = authResponse.Errors });
 
-            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken });
+            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken.JwtId });
 
         }
 
@@ -56,7 +56,7 @@ namespace TweetBook.Controllers.V1
             var authResponse = await identityService.RefreshTokenAsync(request.Token, request.RefreshToken);
             if (!authResponse.Success) return BadRequest(new AuthFailedResponse() { Errors = authResponse.Errors });
 
-            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken });
+            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken.JwtId });
         }
 
 

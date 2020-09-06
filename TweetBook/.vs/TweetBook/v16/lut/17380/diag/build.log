@@ -1,0 +1,23 @@
+[07:20:44.409 Verbose] - BuildManager - Some of the paths are absolute. This may prevent Live Unit Testing from building to the correct location.
+[07:20:44.423 Verbose] - BuildManager - Property BaseOutputPath evaluated to 'bin\' via:
+BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+[07:20:44.424 Verbose] - BuildManager - Property BaseIntermediateOutputPath evaluated to 'D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook\obj\' via:
+BaseIntermediateOutputPath: '$(MSBuildProjectDirectory)\$(BaseIntermediateOutputPath)' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk.Publish\targets\Microsoft.NET.Sdk.Publish.targets:74
+  MSBuildProjectDirectory: 'D:\Self-learning\%283%29.C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook'
+  BaseIntermediateOutputPath: 'obj\' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+[07:20:44.424 Verbose] - BuildManager - Property IntermediateOutputPath evaluated to 'obj\Debug\netcoreapp3.1\' via:
+IntermediateOutputPath: '$(IntermediateOutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:185
+  IntermediateOutputPath: '$(BaseIntermediateOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:39
+    BaseIntermediateOutputPath: 'obj\' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Microsoft.Common.props:46
+    Configuration: 'Debug'
+[07:20:44.425 Verbose] - BuildManager - Property OutputPath evaluated to 'bin\Debug\netcoreapp3.1\' via:
+OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:186
+  OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+    BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+    Configuration: 'Debug'
+[07:20:44.425 Verbose] - BuildManager - Property OutDir evaluated to 'bin\Debug\netcoreapp3.1\' via:
+OutDir: '$(OutputPath)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:193
+  OutputPath: '$(OutputPath)$(TargetFramework.ToLowerInvariant())\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.TargetFrameworkInference.targets:186
+    OutputPath: '$(BaseOutputPath)$(Configuration)\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:33
+      BaseOutputPath: 'bin\' @ C:\Program Files\dotnet\sdk\3.1.301\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.DefaultOutputPaths.targets:31
+      Configuration: 'Debug'

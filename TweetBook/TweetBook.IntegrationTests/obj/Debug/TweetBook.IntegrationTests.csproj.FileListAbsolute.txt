@@ -1,0 +1,14 @@
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\TweetBook.IntegrationTests.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\TweetBook.IntegrationTests.pdb
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\obj\Debug\TweetBook.IntegrationTests.csprojAssemblyReference.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\obj\Debug\TweetBook.IntegrationTests.csproj.CoreCompileInputs.cache
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\obj\Debug\TweetBook.IntegrationTests.csproj.CopyComplete
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\obj\Debug\TweetBook.IntegrationTests.dll
+D:\Self-learning\(3).C#\6.ASP.NET Core\API\TweetBookAPI\TweetBook\TweetBook.IntegrationTests\obj\Debug\TweetBook.IntegrationTests.pdb

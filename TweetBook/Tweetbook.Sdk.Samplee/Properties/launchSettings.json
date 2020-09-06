@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Tweetbook.Sdk.Samplee": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

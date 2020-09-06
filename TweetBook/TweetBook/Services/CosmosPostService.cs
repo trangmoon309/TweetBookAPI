@@ -24,7 +24,6 @@ namespace TweetBook.Services
             this.cosmosStore = cosmosStore;
         }
 
-
         public async Task<bool> AddPost(Post createdPost)
         {
             var cosmosPost = new CosmosPostDto()
@@ -37,10 +36,25 @@ namespace TweetBook.Services
             return response.IsSuccess;
         }
 
+        public Task<bool> CreateTagAsync(Tag createdTag)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> DeletePost(Guid postId)
         {
             var response = await cosmosStore.RemoveByIdAsync(postId.ToString());
             return response.IsSuccess;
+        }
+
+        public Task<Tag> DeleteTagAsync(string tagName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Tag>> GetAllTagsAsync()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Post> GetPostById(Guid postId)
