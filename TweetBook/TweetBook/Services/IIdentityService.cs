@@ -11,5 +11,6 @@ namespace TweetBook.Services
         Task<AuthenticationResult> RegisterAsync(string Email, string Password);
         Task<AuthenticationResult> LoginAsync(string Email, string Password);
         Task<AuthenticationResult> RefreshTokenAsync(string Token, string RefreshToken);
+        Task<AuthenticationResult> LoginWithFacebookAsync(string accessToken); //acessToken sẽ giúp ta call the API
     }
 }

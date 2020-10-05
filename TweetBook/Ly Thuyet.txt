@@ -1,4 +1,9 @@
 ﻿
+DI là khi ta sử dụng một object của một class trong class khác nó. Và trong class khác dùng object đó để gọi đến các phương thức rồi sử dụng công dụng
+của chúng. "A dependency is an object that another object depends on"; "Injection of the service into the constructor of the class where it's used: inject
+service vào hàm tạo" 
+
+services.GetRequiredService<IMyDependency>(); dùng để gọi đến service mà k cần inject ở ctor
 
 1/ Combine service collection:
 - Giúp chúng ta đăng ký service bind với configuration options
@@ -79,7 +84,12 @@ var positionOptions = new PositionOptions();
 - CreateMap<Source,Destination>();
 - CreateMap<Source,Destination>().ForMemer(x => x.member, opt => opt.MapFrom(src => src.Tags.Select(x => x.srcMemer)));
 
-7/ Validating requests with FluentValidation
+7/ Validating REQUESTS with FluentValidation
+- Validation is a process to validate and check the data inserted by the user in the view. ASP.NET MVC provides various 
+mechanisms for the validation like Remote Validation, Validation using Data Annotations, Fluent Validation and Custom 
+Validation.
+- Use Fluent Validation when you want to create some advanced and complex validation for the user data.
+
 - Vi du khi ta tạo một post/tag, trước khi tạo 1 object mới, t phải kiểm tra phần request FromBody có null hay không
     như: 
         if(string.IsNullOrEmpty(request.TagName)) return BadRequest(new {error = "empty name"});
@@ -89,7 +99,14 @@ var positionOptions = new PositionOptions();
 - FluentValidation: package(FluentValidation), tạo folder Validator
     Sau đó dùng ModelState để kiểm tra trạng thái của request bằng cơ chế fluentValidation
 
-- Tạo folder Validator để tạo class validate
+- Tạo folder Validator để tạo class validate, class phải kế thừa AbstractValidator
+- đăng kí DI: (Addmvc).AddFluentValidation(mvcConfig => mvcConfig.RegisterValidatorsFromAssemblyContaining<Startup>())
+
+7.2/ Filter trong ASP.Net Core:
+- class phải kế thừa IAsyncActionFilter
+- Filter Pipeline: 
+    + Được chạy sau khi ASP.Net Core chọn action để thực thi
+    + https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/filters?view=aspnetcore-3.1
 - Tạo folder Filters, class Response.ErrorModel và ErrorResponse
 
 
@@ -120,4 +137,51 @@ vào đầu mỗi controller nữa.
 - sau đó tải package Refit, (an interface automatically creates its own implementation)
 
 10/ Setting up ApiKey-based Authentication:
+- We will use static key across the whole API (static key có thể sử dụng tất cả api) hoặc tích hợp(integrate) service khác với
+your API
+- Bước 1: Thêm class ApiKeyAuthAttribute vào folder Filters
 
+
+11/ Response caching using Redis (Lưu trữ các response tại bộ nhớ tạm dùng Redis: redis là csdl trong bộ nhớ, mã nguồn mở)
+- Redis: cache server, Chính tốc độ đọc ghi nhanh mà Redis có thể làm bộ nhớ đệm, nơi chia sẻ dữ liệu giữa các ứng dụng hoặc 
+làm database tạm thời. Lưu key-value trên bộ nhớ RAM
+- Redis là một sự lựa chọn tuyệt vời khi ta cần đến một server lưu trữ dữ liệu đòi hỏi tính mở rộng cao (scaleable) và chia sẻ
+bởi nhiều tiến trình, nhiều ứng dụng và nhiều server khác nhau.
+- Tạo Cache Service trong folder service
+- Tạo Cache Installer
+- Tạo Cache Folder
+- Tạo CacheAttribute (Cache) và test việc dùng nó trong PostController(GetAll, GetOne)
+
+- Giả sử mỗi giây bạn nhận được 100 request, mỗi request sẽ mất 1s để chờ database query xử lý. Database sẽ dễ bị quá tải, 
+người dùng thì chờ mòn râu.
+
+- Sử dụng caching để cache kết quả query vào RAM, lúc này thời gian tuy xuất chỉ còn tầm 50-100ms, lại không phải cần truy cập 
+database. Hệ thống được giảm tải, còn người dùng lại nhận được kết quả nhanh hơn rất nhiều nhiều.
+- Chỉ cần dùng HashMap dạng Key-Value là bạn đã có thể implement caching một cách đơn giản rồi.
+
+
+12/ Implementing pagination:
+- Khi chúng ta không muốn return everything trong 1 response khi mà response có nhiều items, lúc đó response sẽ chứa rất nhiều dữ liệu, có thể chứa đến
+hàng trăm items (nếu getall,..) dễ dẫn đến việc mất dữ liệu => Thay vì return everything in a single response, chúng ta sẽ return ở các pages.
+- Tạo class Response trong Response folder sau đó chỉnh sửa lại giá trị return của GetAll
+- Tạo class PagedResponse trong Response folder sau đó chỉnh sửa lại giá trị return của GetAll
+- Tạo folder Queries trong Request => tạo PaginationQuery => thêm [FromQuery] vào tham số của GetAll
+- Tạo class PaginationFilter trong folder Domain
+- Tạo class ở MappingProfile
+
+13/ Health-check:
+- Tạo HealthChecksInstaller
+- Đăng kí middelware
+- Tạo folder HealthChecks ở project Contract
+
+
+14/ 
+[FromQuery] - Gets values from the query string. ví dụ: me?firstname=trang&lastname=huynh thì values là trang và huỳnh
+[FromRoute] - Gets values from route data; ví dụ: post/{id=123}/{name=post1} => post/123/post1 thì route data chính là id và name
+[FromForm] - Gets values from posted form fields.
+[FromBody] - Gets values from the request body.
+[FromHeader] - Gets values from HTTP headers.
+https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1
+- FromBody: lấy các thuộc tính từ HTTP Request, dùng cho những kiểu dữ liệu đơn giản, nếu là các kiểu dữ liệu do người
+dùng tạo ra thì nó sẽ bị ignored
+- 

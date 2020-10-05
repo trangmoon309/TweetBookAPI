@@ -21,7 +21,6 @@ namespace TweetBook.Installers
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<DataContext>();
 
-
             services.AddScoped<IPostService, PostService>();
             //services.AddSingleton<IPostService, CosmosPostService>();
         }

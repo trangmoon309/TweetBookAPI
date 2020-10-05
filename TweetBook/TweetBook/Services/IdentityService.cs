@@ -26,14 +26,16 @@ namespace TweetBook.Services
         private readonly JwtSettings jwtSettings;
         private readonly TokenValidationParameters tokenValidationParameters;
         private readonly DataContext dataContext;
+        private readonly IFacebookAuthService facebookAuthService;
 
-        public IdentityService(UserManager<IdentityUser> userManager, JwtSettings jwtSettings, 
-            TokenValidationParameters tokenValidationParameters, DataContext dataContext)
+        public IdentityService(UserManager<IdentityUser> userManager, JwtSettings jwtSettings,
+            TokenValidationParameters tokenValidationParameters, DataContext dataContext, IFacebookAuthService facebookAuthService)
         {
             this.userManager = userManager;
             this.jwtSettings = jwtSettings;
             this.tokenValidationParameters = tokenValidationParameters;
             this.dataContext = dataContext;
+            this.facebookAuthService = facebookAuthService;
         }
 
         public async Task<AuthenticationResult> RegisterAsync(string Email, string Password)
@@ -57,7 +59,6 @@ namespace TweetBook.Services
             };
 
             var result = await userManager.CreateAsync(newUser, Password);
-
 
             //Add Claim
             await userManager.AddClaimAsync(newUser, new Claim("tags.view", "true"));
@@ -97,7 +98,6 @@ namespace TweetBook.Services
             }
 
             return await GenerateAuthenticationResultForUserAsync(user);
-
         }
 
 
@@ -213,6 +213,7 @@ namespace TweetBook.Services
                 //chưa hết hạn
                 return new AuthenticationResult { Errors = new[] { "This token hasn't expired yet" } };
             }
+
             var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
             var storedRefreshToken = await dataContext.RefreshTokens.SingleOrDefaultAsync(x => x.Token == RefreshToken);
 
@@ -242,14 +243,51 @@ namespace TweetBook.Services
                 return new AuthenticationResult { Errors = new[] { "This token doesn't match this JWT." } };
             }
 
+            //nếu refresh token được lưu trữ cho token đó chưa được sử dụng, chưa hết hạn, và invalid thì
             storedRefreshToken.Used = true;
             dataContext.RefreshTokens.Update(storedRefreshToken);
             await dataContext.SaveChangesAsync();
 
+            //Sau đó, chung ta có thể refresh lại token của mình bằng cách gọi lại hàm tạo token
             var user = await userManager.FindByNameAsync(validatedToken.Claims.Single(x => x.Type == "id").Value);
             return await GenerateAuthenticationResultForUserAsync(user);
         }
 
+        public async Task<AuthenticationResult> LoginWithFacebookAsync(string accessToken)
+        {
+            var validatedTokenResult = await facebookAuthService.ValidateAccessTokenAsync(accessToken);
+            if(!validatedTokenResult.Data.IsValid)
+            {
+                return new AuthenticationResult
+                {
+                    Errors = new[] { "Invalid Facebook token" }
+                };
+            }
 
+            var userInfo = await facebookAuthService.GetUserInfoAsync(accessToken);
+            var user = await userManager.FindByEmailAsync(userInfo.Email);
+
+            if(user == null)
+            {
+                var identityUser = new IdentityUser
+                {
+                    Email = userInfo.Email,
+                    Id = Guid.NewGuid().ToString(),
+                    UserName = userInfo.Email
+                };
+
+                var createdUser = await userManager.CreateAsync(identityUser);
+
+                if(!createdUser.Succeeded)
+                {
+                    return new AuthenticationResult
+                    {
+                        Errors = new string[] { "Something went wrong!" }
+                    };
+                }
+
+            }
+            return await GenerateAuthenticationResultForUserAsync(user);
+        }
     }
 }

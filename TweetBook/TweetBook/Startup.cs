@@ -17,6 +17,9 @@ using TweetBook.Options;
 using TweetBook.Installers;
 using TweetBook.Services;
 using AutoMapper;
+using Tweetbook.Contracts.HealthChecks;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace TweetBook
 {
@@ -35,6 +38,11 @@ namespace TweetBook
             //typeof(Startup) tell the mapper to find the assembly that this type is in and automatically resolve
             //any mapping profile and register them in the eye without us have to any work
             services.AddAutoMapper(typeof(Startup));
+
+            //bind 1 sectin cho 1 CLASS(KHÔNG implement interface), thì ta dùng Configure
+            var ApiKeySetting = Configuration.GetSection("ApiKey");
+            services.Configure<ApiKeyOptions>(ApiKeySetting);
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
@@ -51,13 +59,38 @@ namespace TweetBook
                 app.UseHsts();
             }
 
+            app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+            {
+                ResponseWriter = async (context, report) =>
+                {
+                    context.Response.ContentType = "application/json";
+
+                    var response = new HealthCheckResponse
+                    {
+                        Status = report.Status.ToString(),
+                        Checks = report.Entries.Select(x => new HealthCheckss
+                        {
+                            Component = x.Key,
+                            Status = x.Value.Status.ToString(),
+                            Description = x.Value.Description
+                        }),
+                        Duration = report.TotalDuration
+                    };
+
+                    await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
+                }
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseResponseCaching();
 
             app.UseAuthentication();
 
             var swaggerOptions = new SwaggerOption();
             Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            //nếu k cần lấy ngay giá trị đc bind, có thể dùng
             app.UseSwagger(options =>
             {
                 options.RouteTemplate = swaggerOptions.JsonRoute;

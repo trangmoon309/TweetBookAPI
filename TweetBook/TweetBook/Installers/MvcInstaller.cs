@@ -1,6 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TweetBook.Authorization;
+using TweetBook.Cache;
 using TweetBook.Filters;
 using TweetBook.Options;
 using TweetBook.Services;
@@ -26,6 +28,9 @@ namespace TweetBook.Installers
             //Authentication with JWT
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
+            //c2: configuration.GetSection("jwtSettings").Bind(jwtSettings);
+            //Hai cách này dùng để bind 1 section ở appsetting cho 1 ĐỐI TƯỢNG (object)
+            //Còn muốn bind 1 sectin cho 1 CLASS, thì ta dùng Configure
             services.AddSingleton(jwtSettings);
 
             //thiết lập các phiên bản tương thích
@@ -40,13 +45,12 @@ namespace TweetBook.Installers
             //ValdiateIssuer(cho biết rằng token's signature cần được xác thực)
             var tokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
             {
-                ValidateIssuerSigningKey = true,
-                ValidateIssuer = false,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                ValidateAudience = false,
-                //expiration: hết hạn = false => token k bị hết hạn
-                RequireExpirationTime = false,
-                ValidateLifetime = true
+                ValidateIssuerSigningKey = true,    
+                ValidateIssuer = false, //k cho phep viec nhung nguoi khac nhau duoc cap chung 1 token
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)), //xac thuc signature
+                ValidateAudience = false, //1 token không thể đc dùng cho nhiều site
+                RequireExpirationTime = false, // không yêu cầu 1 token phải có exp time
+                ValidateLifetime = true //xác thực lifetime
             };
 
             services.AddSingleton(tokenValidationParameters);
@@ -55,7 +59,7 @@ namespace TweetBook.Installers
             //AUTHENTICATION
             services.AddAuthentication(x =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; //Bearer
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
@@ -64,7 +68,7 @@ namespace TweetBook.Installers
                 // Nếu là valid token, request sẽ được authorized.  => jwtbeaer giống như 1 công cụ để xác thực = token
                 .AddJwtBearer( x => {
                     x.SaveToken = true;
-                    x.TokenValidationParameters = tokenValidationParameters;
+                    x.TokenValidationParameters = tokenValidationParameters; //xác thực token đc lấy từ HTTP Request Header.
                 });
 
 
@@ -80,15 +84,26 @@ namespace TweetBook.Installers
             services.AddMvc(opt => {
                 opt.EnableEndpointRouting = false;
                 opt.Filters.Add<ValidationFilter>();
+                //opt.Filters.Add<ApiKeyAuthAttribute>();
+                //opt.Filters.Add<CachedAttribute>();
             });
 
             services.AddScoped<IIdentityService, IdentityService>();
+
+            //Pagination
+            services.AddSingleton<IUriService>(provider =>
+            {
+                //add DI IUriService-UriService, lấy baseUri để đưa cho hàm tạo của UriService
+                //Khi ta gửi request đến server, request đó sẽ chứa các thuộc tính như: path/scheme/..
+                //Ví dụ gửi request xem tất cả các post
+                //scheme: https
+                //path: api/v1/posts
+                var accessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request; 
+                var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
+                return new UriService(absoluteUri);
+            });
         }
     }
 }
 
-/*
-    1. AddSecurityDefinition: Method này giúp chúng ta định nghĩa cách bảo vệ API bằng cách định nghĩa 1 hoặc nhiều security schema
-    2. AddSecurityRequirement: This method lets you control the given authentication scheme applied either Global level or Operation level.
- 
- */

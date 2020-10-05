@@ -16,6 +16,15 @@ namespace TweetBook.Services
         {
             this.dataContext = dataContext;
         }
+        public async Task<List<Post>> GetPosts(PaginationFilter paginationFilter = null)
+        {
+            if(paginationFilter == null)
+            {
+                return await dataContext.Posts.Include(x => x.Tags).ToListAsync(); //Include như quan hệ 1-n; 1post có nhiều tags
+            }
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;// ví dụ muốn xem trang 2 => skip = 1*pagesize, nghĩa là skip trang 1
+            return await dataContext.Posts.Include(x => x.Tags).Skip(skip).Take(paginationFilter.PageSize).ToListAsync();
+        }
 
         public async Task<List<Post>> GetPosts()
         {

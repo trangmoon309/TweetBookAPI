@@ -12,10 +12,12 @@ namespace TweetBook.Filters
     //cần phải đăng kí MvcInstaller
     public class ValidationFilter : IAsyncActionFilter
     {
-        //what will happen before we get into the controller
+        //Run code immediately before and after an action method is called.
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            //before controller
+            //before: Do something before the action executes.
+            //Vì theo sơ đồ hoạt động, cơ chế model binding được thực thi trước Action Filter
+            //Nên ta mới có thể dùng modelstate như dưới được.
             if (!context.ModelState.IsValid)
             {
                 var errorsInModelState = context.ModelState
@@ -25,7 +27,9 @@ namespace TweetBook.Filters
                 var errorResponse = new ErrorResponse();
                 foreach(var item in errorsInModelState)
                 {
-                    //mỗi error có nhiều error-messeage
+                    //mỗi error có nhiều error-messeage: value=>errors=>error-messeage
+                    //item: error int errors
+                    //subError: error-messages in errors
                     foreach(var subError in item.Value)
                     {
                         var errorModel = new ErrorModel
@@ -42,9 +46,9 @@ namespace TweetBook.Filters
                 context.Result = new BadRequestObjectResult(errorResponse);
                 return;
             }
-            await next(); //delegate call here
+            await next(); //calls the action method.
 
-            //after controller
+            //after controller: Do something after the action executes.
         }
     }
 }

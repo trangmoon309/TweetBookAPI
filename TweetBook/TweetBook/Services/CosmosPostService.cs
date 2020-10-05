@@ -70,6 +70,11 @@ namespace TweetBook.Services
             return posts.Select(x => new Post { Id = Guid.Parse(x.Id), Name = x.Name }).ToList();
         }
 
+        public Task<List<Post>> GetPosts(PaginationFilter paginationFilter)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdatePost(Post updatedPost)
         {
             var post = await cosmosStore.Query().FirstOrDefaultAsync(p => p.Id == updatedPost.Id.ToString());

@@ -20,11 +20,12 @@ namespace TweetBook.Installers
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "TweetBook API", Version = "v1" });
 
-                //Swagger-Example
+                //Swagger-Example: Swagger extension
                 options.ExampleFilters();
 
                 //Swagger also needs to know about jwt config authentication
                 //Thêm Authorization vào swaggerUI
+                // this method lets you enable the authentication schemes. (One can use multiple security schemes too if needed.
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT Authorization header using bearer scheme",
@@ -33,14 +34,26 @@ namespace TweetBook.Installers
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {new OpenApiSecurityScheme{Reference = new OpenApiReference
+                //This method lets you control the given authentication scheme applied either Global level or Operation level.
+                options.AddSecurityRequirement(
+                    new OpenApiSecurityRequirement
                     {
-                        Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
-                    }}, new List<string>()}
-                });
+                        {
+                            new OpenApiSecurityScheme{
+                                Name = "Name of Security Scheme",
+                                Type = SecuritySchemeType.ApiKey,
+                                In = ParameterLocation.Header,
+                                Reference = new OpenApiReference
+                                {   
+                                    //như t học ở MVC, muốn thực hiện một công việc cần biết id thì route thường có dạng
+                                    // controller/action?Id=...&token=
+                                    // hoặc controller/action#Id
+                                    Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                                }}, 
+                            new List<string>()
+                        }
+                    });
 
                 // Extended Swagger documentation
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -55,3 +68,8 @@ namespace TweetBook.Installers
         }
     }
 }
+/*
+    1. AddSecurityDefinition: Method này giúp chúng ta định nghĩa cách bảo vệ API bằng cách định nghĩa 1 hoặc nhiều security schema
+    2. AddSecurityRequirement: This method lets you control the given authentication scheme applied either Global level or Operation level.
+ 
+ */

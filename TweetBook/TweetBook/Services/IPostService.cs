@@ -10,6 +10,7 @@ namespace TweetBook.Services
     public interface IPostService
     {
         Task<List<Post>> GetPosts();
+        Task<List<Post>> GetPosts(PaginationFilter paginationFilter);
         Task<Post> GetPostById(Guid postId);
         Task<bool> UpdatePost(Post updatedPost);
         Task<bool> DeletePost(Guid postId);

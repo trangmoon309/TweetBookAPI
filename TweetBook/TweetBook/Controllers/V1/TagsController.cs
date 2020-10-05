@@ -75,6 +75,7 @@ namespace TweetBook.Controllers
             //{
             //    return BadRequest(new { error = "Not validated" });
             //}
+            //class này có validator là: ValadationFilter(Model.IsValid) và CreateTagRequestValidator
             var newTag = new Tag
             {
                 TagId = Guid.NewGuid().ToString(),

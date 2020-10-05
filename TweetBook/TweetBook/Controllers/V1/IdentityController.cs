@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Tweetbook.Contracts.V1.Request;
 using TweetBook.Contracts.V1;
 using TweetBook.Contracts.V1.Request;
 using TweetBook.Contracts.V1.Responses;
@@ -37,7 +38,25 @@ namespace TweetBook.Controllers.V1
             {
                 return BadRequest(new AuthFailedResponse() { Errors = authResponse.Errors });
             }
-            return Ok(new AuthSuccessResponse() { Token = authResponse.Token, RefreshToken = authResponse.RefreshToken.JwtId });
+            return Ok(new AuthSuccessResponse() 
+            { 
+                Token = authResponse.Token, 
+                RefreshToken = authResponse.RefreshToken.JwtId 
+            });
+        }
+
+        [HttpPost(ApiRoutes.Identity.FacebookAuth)]
+        public async Task<IActionResult> FacebookAuth([FromBody] UserFacebookAuthRequest request)
+        {
+            var authResponse = await identityService.LoginWithFacebookAsync(request.AccessToken);
+            if (!authResponse.Success) return BadRequest(new AuthFailedResponse() { Errors = authResponse.Errors });
+
+            return Ok(new AuthSuccessResponse() 
+            { 
+                Token = authResponse.Token, 
+                RefreshToken = authResponse.RefreshToken.JwtId 
+            });
+
         }
 
         [HttpPost(ApiRoutes.Identity.Login)]

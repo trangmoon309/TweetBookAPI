@@ -8,6 +8,7 @@ namespace TweetBook.Extensions
 {
     public static class GeneralExtensions
     {
+        //HTTPContext: Encapsulates all HTTP-specific information about an individual HTTP request.
         public static string GetUserId(this HttpContext httpContext)
         {
             if(httpContext.User == null)

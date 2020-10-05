@@ -18,7 +18,7 @@ namespace TweetBook.Installers
             var installers = typeof(Startup).Assembly.ExportedTypes.Where(x =>
                 typeof(IInstaller).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract).Select(Activator.CreateInstance).Cast<IInstaller>().ToList();
 
-            //Nếu bỏ Select(Activator.CreateInstance) thì: - Error: Unable to cast object of type 'System.RuntimeType' to type 'TweetBook.IInstaller'.
+            //Select(Activator.CreateInstance): lấy những phần tử đã chọn được từ where và tạo ra các instance của chusng
 
             installers.ForEach(installer => installer.InstallService(configuration, services));
         }

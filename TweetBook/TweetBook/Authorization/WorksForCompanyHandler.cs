@@ -11,6 +11,7 @@ namespace TweetBook.Authorization
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, WorksForCompanyRequirement requirement)
         {
+            //var x = context.User.Claims.Single(x => x.Type == "Email").Value;
             var userEmailAddress = context.User?.FindFirstValue(ClaimTypes.Email) ?? string.Empty;
             if (userEmailAddress.EndsWith(requirement.DomainName))
             {
